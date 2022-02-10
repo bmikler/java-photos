@@ -21,4 +21,24 @@ public class UserRepository implements HibernateRepository{
 
     }
 
+    @Override
+    public void deleteById(long id){
+        final Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query<User> query = session.createQuery("from User where id = :id", User.class);
+        query.setParameter("id", id);
+
+        User user = query.uniqueResult();
+
+        session.beginTransaction();
+
+        session.delete(user);
+
+        session.getTransaction().commit();
+
+        session.close();
+
+
+    }
+
 }

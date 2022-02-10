@@ -40,7 +40,11 @@ public class PhotosService {
     public void removeUser(long userId) {
 
         User user = userRepository.findById(userId);
-        userRepository.remove(user);
+        user.getPhotoLiked().forEach(photo ->{
+            photo.removeLike(user);
+            photoRepository.update(photo);
+        });
+        userRepository.deleteById(userId);
 
     }
 
@@ -54,8 +58,7 @@ public class PhotosService {
 
     public void removeAlbum(long albumId) {
 
-        Album album = albumRepository.findById(albumId);
-        albumRepository.remove(album);
+        albumRepository.deleteById(albumId);
 
 
     }
@@ -70,8 +73,7 @@ public class PhotosService {
 
     public void removePicture(long photoId) {
 
-        Photo photo = photoRepository.findById(photoId);
-        photoRepository.remove(photo);
+        photoRepository.deleteById(photoId);
 
     }
 
@@ -87,6 +89,7 @@ public class PhotosService {
     }
 
     public void unLike(long userId, long photoId) {
+
         Photo photo = photoRepository.findById(photoId);
         User user = userRepository.findById(userId);
 

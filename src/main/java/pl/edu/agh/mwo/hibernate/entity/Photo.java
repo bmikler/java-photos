@@ -12,7 +12,7 @@ public class Photo {
     private long id;
     private String name;
     private LocalDateTime date;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Likes",
             joinColumns = @JoinColumn(name = "photo_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -37,6 +37,10 @@ public class Photo {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Set<User> getLikes() {
+        return likes;
     }
 
     public void addLike(User user) {
