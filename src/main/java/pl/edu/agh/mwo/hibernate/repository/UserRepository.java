@@ -13,7 +13,11 @@ public class UserRepository implements HibernateRepository{
         Query<User> query = session.createQuery("from User where id = :id", User.class);
         query.setParameter("id", id);
 
-        return query.uniqueResult();
+        User user = query.uniqueResult();
+
+        session.close();
+
+        return user;
 
     }
 

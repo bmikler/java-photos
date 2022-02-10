@@ -12,8 +12,11 @@ public class Photo {
     private long id;
     private String name;
     private LocalDateTime date;
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "Likes",
+            joinColumns = @JoinColumn(name = "photo_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private Set<User> likes;
 
     public Photo() {

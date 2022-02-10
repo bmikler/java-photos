@@ -2,6 +2,7 @@ package pl.edu.agh.mwo.hibernate.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,9 +13,9 @@ public class User {
     private long id;
     private String username;
     private LocalDateTime joinDate;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private Set<Album> albums;
+    private Set<Album> albums = new HashSet<>();
 
     public User() {
     }

@@ -10,7 +10,19 @@ public interface HibernateRepository {
         final Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.save(t);
+        session.persist(t);
+
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
+    default <T> void update(T t) {
+
+        final Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        session.merge(t);
 
         session.getTransaction().commit();
         session.close();

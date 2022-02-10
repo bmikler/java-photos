@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,17 +12,16 @@ public class Album {
     private long id;
     private String name;
     private String description;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="album_id")
-    private Set<Photo> photos;
+    private Set<Photo> photos = new HashSet<>();
 
     public Album() {
     }
 
-    public Album(String name, String description, Set<Photo> photos) {
+    public Album(String name, String description) {
         this.name = name;
         this.description = description;
-        this.photos = photos;
     }
 
     public long getId() {
