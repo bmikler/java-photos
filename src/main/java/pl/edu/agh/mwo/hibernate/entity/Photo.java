@@ -2,6 +2,7 @@ package pl.edu.agh.mwo.hibernate.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Photo {
@@ -11,8 +12,9 @@ public class Photo {
     private long id;
     private String name;
     private LocalDateTime date;
-    @ManyToMany(mappedBy = "id")
-    private Album album;
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<User> likes;
 
     public Photo() {
     }
@@ -34,7 +36,12 @@ public class Photo {
         return date;
     }
 
-    public Album getAlbum() {
-        return album;
+    public void addLike(User user) {
+        likes.add(user);
     }
+
+    public void removeLike(User user) {
+        likes.remove(user);
+    }
+
 }
