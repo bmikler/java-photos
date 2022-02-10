@@ -1,9 +1,6 @@
 package pl.edu.agh.mwo.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,9 +8,11 @@ public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String name;
-    LocalDateTime date;
+    private long id;
+    private String name;
+    private LocalDateTime date;
+    @ManyToMany(mappedBy = "id")
+    private Album album;
 
     public Photo() {
     }
@@ -33,5 +32,9 @@ public class Photo {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Album getAlbum() {
+        return album;
     }
 }

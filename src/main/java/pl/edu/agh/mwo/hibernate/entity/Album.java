@@ -1,25 +1,27 @@
 package pl.edu.agh.mwo.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String name;
-    String description;
+    private long id;
+    private String name;
+    private String description;
+    @OneToMany
+    @JoinColumn(name="album_id")
+    private Set<Photo> photos;
 
     public Album() {
     }
 
-    public Album(String name, String description) {
+    public Album(String name, String description, Set<Photo> photos) {
         this.name = name;
         this.description = description;
+        this.photos = photos;
     }
 
     public long getId() {
@@ -32,5 +34,17 @@ public class Album {
 
     public String getDescription() {
         return description;
+    }
+
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void addPhoto(Photo photo){
+        photos.add(photo);
+    }
+
+    public void removePhoto(Photo photo){
+        photos.remove(photo);
     }
 }
