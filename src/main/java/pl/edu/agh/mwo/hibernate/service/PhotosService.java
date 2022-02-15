@@ -31,11 +31,7 @@ public class PhotosService {
         return userRepository.findById(id);
     }
 
-    public void createUser(User user) {
-
-        userRepository.save(user);
-
-    }
+    public void createUser(User user) {userRepository.save(user);}
 
     public void removeUser(long userId) {
 
@@ -56,12 +52,7 @@ public class PhotosService {
 
     }
 
-    public void removeAlbum(long albumId) {
-
-        albumRepository.deleteById(albumId);
-
-
-    }
+    public void removeAlbum(long albumId) {albumRepository.deleteById(albumId);}
 
     public void addPicture(long albumId, Photo photo) {
 
@@ -96,5 +87,6 @@ public class PhotosService {
         photo.removeLike(user);
         photoRepository.update(photo);
     }
+
 
 }

@@ -2,9 +2,7 @@ package pl.edu.agh.mwo.hibernate.repository;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import pl.edu.agh.mwo.hibernate.entity.Album;
 import pl.edu.agh.mwo.hibernate.entity.Photo;
-import pl.edu.agh.mwo.hibernate.entity.User;
 
 public class PhotoRepository implements HibernateRepository{
 

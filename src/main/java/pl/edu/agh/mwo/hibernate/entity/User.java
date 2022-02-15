@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Entity
 public class User {
 
@@ -19,6 +20,7 @@ public class User {
     private Set<Album> albums = new HashSet<>();
     @ManyToMany(mappedBy = "likes", fetch = FetchType.EAGER)
     private Set<Photo> photoLiked = new HashSet<>();
+
 
     public User() {
     }
@@ -47,6 +49,7 @@ public class User {
     public Set<Photo> getPhotoLiked() {
         return photoLiked;
     }
+
 
     public void addAlbum(Album album) {
         albums.add(album);

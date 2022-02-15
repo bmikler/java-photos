@@ -12,8 +12,6 @@ import java.util.HashSet;
 
 public class Main {
 
-	Session session;
-
 	public static void main(String[] args) {
 		Main main = new Main();
 
@@ -29,12 +27,17 @@ public class Main {
 
 		photosService.createUser(user);
 
-
-
 		User watcher = new User("watcher", LocalDateTime.now());
 		photosService.createUser(watcher);
 
-		photosService.like(2L,1L);
+		photosService.like(2L,1);
+
+		photosService.addFriend(1L,2L);
+
+		System.out.println("2");
+		photosService.findUserById(2L).getFriends().forEach(System.out::println);
+		System.out.println("1");
+		photosService.findUserById(1L).getFriends().forEach(System.out::println);
 
 		photosService.removeUser(2L);
 
@@ -44,12 +47,7 @@ public class Main {
 		main.close();
 	}
 
-	public Main() {
-		session = HibernateUtil.getSessionFactory().openSession();
-	}
-
 	public void close() {
-		session.close();
 		HibernateUtil.shutdown();
 	}
 }
